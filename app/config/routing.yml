@@ -1,0 +1,13 @@
+xvnd_frontend:
+    resource: "@XvndFrontendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+xvnd_backend:
+    resource: "@XvndBackendBundle/Controller/"
+    type:     sonata_admin
+    prefix: /admin
+
+admin_area:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin

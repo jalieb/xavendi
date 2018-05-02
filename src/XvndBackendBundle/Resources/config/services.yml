@@ -1,0 +1,7 @@
+services:
+    xvnd_backend.admin.test:
+        class: XvndBackendBundle\Admin\TestAdmin
+        arguments: [~, XvndBackendBundle\Entity\Test, XvndBackendBundle:TestAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Test }
+        public: true
