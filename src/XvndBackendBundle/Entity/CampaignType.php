@@ -5,12 +5,12 @@ namespace XvndBackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Test
+ * CampaignType
  *
- * @ORM\Table(name="test")
- * @ORM\Entity(repositoryClass="XvndBackendBundle\Repository\TestRepository")
+ * @ORM\Table(name="campaign_type")
+ * @ORM\Entity(repositoryClass="XvndBackendBundle\Repository\CampaignTypeRepository")
  */
-class Test
+class CampaignType
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class Test
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
@@ -44,7 +44,7 @@ class Test
      *
      * @param string $name
      *
-     * @return Test
+     * @return CampaignType
      */
     public function setName($name)
     {
@@ -63,9 +63,12 @@ class Test
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return (string) $this->getName();
+        return $this->getName();
     }
 }
 
