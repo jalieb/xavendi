@@ -72,6 +72,18 @@ class Campaign
      */
     protected $placements;
 
+    /**
+     * Many Campaigns have Many Leads.
+     * @ORM\ManyToMany(targetEntity="Lead", mappedBy="campaigns", cascade={"persist"}, orphanRemoval=false)
+     */
+    protected $leads;
+
+    /**
+     * One Campaign has Many Fields.
+     * @ORM\OneToMany(targetEntity="Field", mappedBy="campaign", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $fields;
+
 
     /**
      * Constructor
@@ -79,6 +91,8 @@ class Campaign
     public function __construct()
     {
         $this->placements = new ArrayCollection();
+        $this->leads = new ArrayCollection();
+        $this->fields = new ArrayCollection();
     }
 
     /**
@@ -245,6 +259,7 @@ class Campaign
     public function addPlacement(Placement $placement)
     {
         $this->placements[] = $placement;
+        $placement->addCampaign($this);
 
         return $this;
     }
@@ -257,6 +272,7 @@ class Campaign
     public function removePlacement(Placement $placement)
     {
         $this->placements->removeElement($placement);
+        $placement->removeCampaign($this);
     }
 
     /**
@@ -267,6 +283,78 @@ class Campaign
     public function getPlacements()
     {
         return $this->placements;
+    }
+
+    /**
+     * Add lead
+     *
+     * @param \XvndBackendBundle\Entity\Lead $lead
+     *
+     * @return Campaign
+     */
+    public function addLead(\XvndBackendBundle\Entity\Lead $lead)
+    {
+        $this->leads[] = $lead;
+        $lead->addCampaign($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove lead
+     *
+     * @param \XvndBackendBundle\Entity\Lead $lead
+     */
+    public function removeLead(\XvndBackendBundle\Entity\Lead $lead)
+    {
+        $this->leads->removeElement($lead);
+        $lead->removeCampaign($this);
+    }
+
+    /**
+     * Get leads
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLeads()
+    {
+        return $this->leads;
+    }
+
+    /**
+     * Add field
+     *
+     * @param \XvndBackendBundle\Entity\Field $field
+     *
+     * @return Campaign
+     */
+    public function addField(Field $field)
+    {
+        $this->fields[] = $field;
+        $field->setCampaign($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove field
+     *
+     * @param \XvndBackendBundle\Entity\Field $field
+     */
+    public function removeField(Field $field)
+    {
+        $this->fields->removeElement($field);
+        $field->setCampaign(null);
+    }
+
+    /**
+     * Get fields
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFields()
+    {
+        return $this->fields;
     }
 
     /**

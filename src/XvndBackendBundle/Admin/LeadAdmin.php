@@ -8,60 +8,43 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class PlacementAdmin extends AbstractAdmin
+class LeadAdmin extends AbstractAdmin
 {
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name')
-            ->add('publisher')
-            ->add('campaigns')
+            ->add('uniqueUserHash')
+            ->add('data')
         ;
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
-            ->add('publisher')
-            ->add('campaigns')
+            ->addIdentifier('uniqueUserHash')
+            ->add('data')
         ;
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
-            ->add('publisher', 'sonata_type_model', array(
-                'btn_add' => true,
-                'required' => false
-            ))
+            ->add('uniqueUserHash')
+            ->add('data')
             ->add('campaigns', 'sonata_type_model', array(
                 'multiple' => true,
                 'required' => false,
                 'btn_add' => false
             ))
+            ->add('placement')
         ;
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('name')
-            ->add('publisher')
-            ->add('campaigns')
+            ->add('uniqueUserHash')
+            ->add('data')
         ;
     }
 }

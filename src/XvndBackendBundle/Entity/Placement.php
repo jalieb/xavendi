@@ -44,6 +44,12 @@ class Placement
      */
     private $campaigns;
 
+    /**
+     * One Placement has Many Leads.
+     * @ORM\OneToMany(targetEntity="Lead", mappedBy="placement")
+     */
+    protected $leads;
+
 
     /**
      * Constructor
@@ -51,6 +57,7 @@ class Placement
     public function __construct()
     {
         $this->campaigns = new ArrayCollection();
+        $this->leads = new ArrayCollection();
     }
 
     /**
@@ -120,7 +127,11 @@ class Placement
      */
     public function addCampaign(Campaign $campaign)
     {
-        $this->campaigns[] = $campaign;
+        if($this->campaigns->contains($campaign)) {
+            return;
+        }
+
+        $this->campaigns->add($campaign);
 
         return $this;
     }
@@ -143,6 +154,42 @@ class Placement
     public function getCampaigns()
     {
         return $this->campaigns;
+    }
+
+    /**
+     * Add lead
+     *
+     * @param \XvndBackendBundle\Entity\Lead $lead
+     *
+     * @return Placement
+     */
+    public function addLead(Lead $lead)
+    {
+        $this->leads->add($lead);
+        $lead->setPlacement($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove lead
+     *
+     * @param \XvndBackendBundle\Entity\Lead $lead
+     */
+    public function removeLead(Lead $lead)
+    {
+        $this->leads->removeElement($lead);
+        $lead->setPlacement(null);
+    }
+
+    /**
+     * Get leads
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLeads()
+    {
+        return $this->leads;
     }
 
     /**
