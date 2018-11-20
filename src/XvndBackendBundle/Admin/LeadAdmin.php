@@ -8,33 +8,43 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class TestAdmin extends AbstractAdmin
+class LeadAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name')
+            ->add('uniqueUserHash')
+            ->add('data')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
+            ->addIdentifier('uniqueUserHash')
+            ->add('data')
         ;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
+            ->add('uniqueUserHash')
+            ->add('data')
+            ->add('campaigns', 'sonata_type_model', array(
+                'multiple' => true,
+                'required' => false,
+                'btn_add' => false
+            ))
+            ->add('placement')
         ;
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('name')
+            ->add('uniqueUserHash')
+            ->add('data')
         ;
     }
 }

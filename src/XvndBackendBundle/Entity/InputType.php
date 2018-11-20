@@ -5,12 +5,12 @@ namespace XvndBackendBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Test
+ * InputType
  *
- * @ORM\Table(name="test")
- * @ORM\Entity(repositoryClass="XvndBackendBundle\Repository\TestRepository")
+ * @ORM\Table(name="input_type")
+ * @ORM\Entity(repositoryClass="XvndBackendBundle\Repository\InputTypeRepository")
  */
-class Test
+class InputType
 {
     /**
      * @var int
@@ -24,7 +24,7 @@ class Test
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 
@@ -44,7 +44,7 @@ class Test
      *
      * @param string $name
      *
-     * @return Test
+     * @return InputType
      */
     public function setName($name)
     {

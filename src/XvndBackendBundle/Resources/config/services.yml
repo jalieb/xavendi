@@ -1,7 +1,42 @@
 services:
-    xvnd_backend.admin.test:
-        class: XvndBackendBundle\Admin\TestAdmin
-        arguments: [~, XvndBackendBundle\Entity\Test, XvndBackendBundle:TestAdmin]
+    xvnd_backend.admin.advertiser:
+        class: XvndBackendBundle\Admin\AdvertiserAdmin
+        arguments: [~, XvndBackendBundle\Entity\Advertiser, XvndBackendBundle:AdvertiserAdmin]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Test }
+            - { name: sonata.admin, manager_type: orm, group: Advertiser, label: Alle anzeigen }
+        public: true
+
+    xvnd_backend.admin.campaign:
+        class: XvndBackendBundle\Admin\CampaignAdmin
+        arguments: [~, XvndBackendBundle\Entity\Campaign, XvndBackendBundle:CampaignAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Campaign, label: Alle anzeigen }
+        public: true
+
+    xvnd_backend.admin.publisher:
+        class: XvndBackendBundle\Admin\PublisherAdmin
+        arguments: [~, XvndBackendBundle\Entity\Publisher, XvndBackendBundle:PublisherAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Publisher, label: Alle anzeigen }
+        public: true
+
+    xvnd_backend.admin.placement:
+        class: XvndBackendBundle\Admin\PlacementAdmin
+        arguments: [~, XvndBackendBundle\Entity\Placement, XvndBackendBundle:PlacementAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Placement, label: Alle anzeigen }
+        public: true
+
+    xvnd_backend.admin.lead:
+        class: XvndBackendBundle\Admin\LeadAdmin
+        arguments: [~, XvndBackendBundle\Entity\Lead, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Lead, show_in_dashboard: false }
+        public: true
+
+    xvnd_backend.admin.field:
+        class: XvndBackendBundle\Admin\FieldAdmin
+        arguments: [~, XvndBackendBundle\Entity\Field, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Field, show_in_dashboard: false }
         public: true
